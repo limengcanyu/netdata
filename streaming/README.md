@@ -492,7 +492,7 @@ this writing, Netdata supports:
 -   json document DBs
 -   all the compatibles to the above (e.g. kairosdb, influxdb, etc)
 
-Check the Netdata [exporting documentation](/docs/export/README.md) for configuring this.
+Check the Netdata [exporting documentation](/docs/export/external-databases.md) for configuring this.
 
 This is how such a solution will work:
 
@@ -554,7 +554,7 @@ ERROR : STREAM_RECEIVER[CHILD HOSTNAME,[CHILD IP]:CHILD PORT] : sent command 'B'
 
 In this example, `B` was part of a `BEGIN` message that was cut due to connection problems.
 
-Slow connections can also cause problems when the parent misses a message and then recieves a command related to the
+Slow connections can also cause problems when the parent misses a message and then receives a command related to the
 missed message. For example, a parent might miss a message containing the child's charts, and then doesn't know
 what to do with the `SET` message that follows. When that happens, the parent will show a message like this:
 

@@ -187,7 +187,7 @@ portable_del_group() {
       run groupdel "${groupname}" && return 0
     else
       echo >&2 "Group ${groupname} already removed in a previous step."
-      run_ok
+      return 0
     fi
   fi
 
@@ -197,6 +197,7 @@ portable_del_group() {
       run dseditgroup -o delete "${groupname}" && return 0
     else
       echo >&2 "Could not find group ${groupname}, nothing to do"
+      return 0
     fi
   fi
 
@@ -452,9 +453,17 @@ rm_file /etc/logrotate.d/netdata
 rm_file /etc/systemd/system/netdata.service
 rm_file /lib/systemd/system/netdata.service
 rm_file /usr/lib/systemd/system/netdata.service
+rm_file /etc/systemd/system/netdata-updater.service
+rm_file /lib/systemd/system/netdata-updater.service
+rm_file /usr/lib/systemd/system/netdata-updater.service
+rm_file /etc/systemd/system/netdata-updater.timer
+rm_file /lib/systemd/system/netdata-updater.timer
+rm_file /usr/lib/systemd/system/netdata-updater.timer
 rm_file /etc/init.d/netdata
 rm_file /etc/periodic/daily/netdata-updater
 rm_file /etc/cron.daily/netdata-updater
+rm_file /etc/cron.d/netdata-updater
+
 
 if [ -n "${NETDATA_PREFIX}" ] && [ -d "${NETDATA_PREFIX}" ]; then
   rm_dir "${NETDATA_PREFIX}"
